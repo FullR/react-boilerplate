@@ -15,7 +15,7 @@ module.exports = {
     ]
   },
   output: {
-    path: local("build"),
+    path: local("dist"),
     filename: "bundle.js"
   },
   module: {

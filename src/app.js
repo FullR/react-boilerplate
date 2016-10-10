@@ -3,5 +3,10 @@ import "index.html";
 import ReactDOM from "react-dom";
 import React from "react";
 import Router from "router";
+import ready from "util/ready";
 
-ReactDOM.render(<Router/>, document.querySelector("#app-container"));
+function entry() {
+  ReactDOM.render(<Router/>, document.querySelector("#app-container"));
+}
+
+ready.then(entry);

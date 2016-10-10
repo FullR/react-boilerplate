@@ -5,7 +5,7 @@ const api = require("./api");
 module.exports = (port) => {
   const app = express();
   app.use(morgan("dev"));
-  app.use(express.static("build"));
+  app.use(express.static("dist"));
   app.use("/api", api);
 
   app.listen(port, (error) => {
