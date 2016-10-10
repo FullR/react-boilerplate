@@ -1,4 +1,5 @@
 #!/bin/bash
 
 cd cordova
-cordova build android
+cordova build android --release
+cp platforms/android/build/outputs/apk/android-release-unsigned.apk ../builds

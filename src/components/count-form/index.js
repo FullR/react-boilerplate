@@ -1,17 +1,17 @@
 import React, {PropTypes} from "react";
-import cx from "./style.css";
-import Button from "components/button";
+import style from "./style.css";
+import Button from "material-ui/RaisedButton";
 import Screen from "components/screen";
 
 export default function CountForm(props) {
-  const {count, onIncrement, onDecrement, className} = props;
-  const classNames = cx(className, "root");
+  const {count, onIncrement, onDecrement} = props;
 
   return (
-    <Screen className={classNames}>
-      <Button onClick={onDecrement}>-</Button>
+    <Screen className={style.root}>
+      this is a bunch of text
+      <Button onTouchTap={onDecrement} primary>-</Button>
         {count}
-      <Button onClick={onIncrement}>+</Button>
+      <Button onTouchTap={onIncrement} primary>+</Button>
     </Screen>
   );
 }

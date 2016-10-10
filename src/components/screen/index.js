@@ -1,12 +1,11 @@
 import React, {PropTypes} from "react";
-import cx from "./style.css";
+import style from "./style.css";
 
 export default function Screen(props) {
   const {children, className} = props;
-  const classNames = cx(className, "root");
 
   return (
-    <div className={classNames}>
+    <div className={style.root}>
       {children}
     </div>
   );

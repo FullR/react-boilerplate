@@ -26,17 +26,14 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: [
-          "classnames",
-          ExtractTextPlugin.extract("css?modules&importLoaders=1&localIdentName=[local]___[hash:base64:5]")
-        ]
+        loader: ExtractTextPlugin.extract("style", "css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]")
       },
       {
         test: /\.json$/,
         loader: "json"
       },
       {
-        test: /\.html$/,
+        test: /\.(html|eot|svg|ttf|woff|woff2)$/,
         loader: "file?name=[name].[ext]"
       },
       {
@@ -46,7 +43,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin("styles.css"),
+    new ExtractTextPlugin("styles.css", {allChunks: true}),
     ifProd(new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify("production")
