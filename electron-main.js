@@ -12,6 +12,6 @@ app.on("ready", () => {
     minHeight: height,
     center: true
   });
-  app.setAppUserModelId("com.criticalthinking.app-id");
+  app.setAppUserModelId("io.github.fullr.app-id");
   mainWindow.loadURL(`file://${__dirname}/www/index.html`);
 });

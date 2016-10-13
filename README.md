@@ -2,8 +2,6 @@ My personal react-webpack-babel-whatever boilerplate.
 
 ## Features
 * ES2016 + JSX
-* Redux state management
-* Routing with React-router
 * Express webserver
 * CSS Modules
 * Standalone desktop builds using [Electron](http://electron.atom.io/)

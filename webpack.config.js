@@ -22,7 +22,12 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         loader: "babel"
+      },
+      {
+        test: /\.global\.css$/,
+        loader: ExtractTextPlugin.extract("style", "css")
       },
       {
         test: /\.css$/,
