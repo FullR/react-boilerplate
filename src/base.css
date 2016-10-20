@@ -1,7 +1,7 @@
 
 @import "roboto-fontface/css/roboto/roboto-fontface.css";
 
-html, body, #app {
+html, body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -12,6 +12,8 @@ html {
   touch-action: manipulation;
 }
 
-body {
+:global #app {
+  width: 100%;
+  height: 100%;
   font-family: roboto;
 }
