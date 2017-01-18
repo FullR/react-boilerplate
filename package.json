@@ -58,17 +58,17 @@
     "webpack-dev-server": "^1.15.0"
   },
   "dependencies": {
-    "babel-polyfill": "^6.13.0",
+    "babel-polyfill": "^6.20.0",
     "classnames": "^2.2.5",
-    "electron-prebuilt": "^1.4.4",
+    "electron-prebuilt": "^1.4.13",
     "express": "^4.14.0",
     "hasher": "^1.2.0",
     "morgan": "^1.7.0",
     "normalize-css": "^2.3.1",
     "page": "^1.7.1",
-    "react": "^15.3.1",
-    "react-dom": "^15.3.1",
-    "react-tap-event-plugin": "^1.0.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-tap-event-plugin": "^2.0.1",
     "roboto-fontface": "^0.6.0"
   }
 }
