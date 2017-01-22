@@ -72,6 +72,7 @@
     "react-dom": "^15.4.2",
     "react-tap-event-plugin": "^2.0.1",
     "roboto-fontface": "^0.6.0",
+    "route-parser": "0.0.5",
     "socket.io": "^1.7.2"
   }
 }

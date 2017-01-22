@@ -2,12 +2,22 @@ import {React, Component} from "component";
 import style from "./style.css";
 
 export default class LobbyPage extends Component {
-  render() {
-    const {children} = this.props;
+  state = {name: "", roomId: ''};
 
+  handleNameChange = (event) => this.setState({name: event.target.value});
+  handleRoomIdChange = (event) => this.setState({roomId: event.target.value});
+  handleCreateRoom = () => {
+    console.log("creating room!");
+  };
+
+  render() {
     return (
       <div className={style.root}>
-        {children}
+        {this.props.foo}
+        <input onChange={this.handleRoomIdChange} placeholder="Room"/>
+        <input onChange={this.handleNameChange} placeholder="Name"/>
+        <hr/>
+        <button onClick={this.handleCreateRoom}>Create Room</button>
       </div>
     );
   }
