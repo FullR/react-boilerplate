@@ -1,6 +1,8 @@
 import React from "react";
+import {observer} from "mobx-react";
 
-module.exports = {
-  React,
-  Component: React.Component
-}
+export const Component = observer(React.Component);
+
+export {default as React} from "react";
+
+export default {React, Component};

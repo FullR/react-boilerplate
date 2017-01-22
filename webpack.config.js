@@ -10,6 +10,7 @@ const ifProd = (v, elseV=null) => PROD ? v : elseV;
 
 module.exports = {
   entry: "./src/app.js",
+  devtool: PROD ? null : "source-map",
   resolve: {
     root: [
       path.resolve("./src")
