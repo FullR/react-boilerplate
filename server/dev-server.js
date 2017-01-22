@@ -6,7 +6,8 @@ module.exports = (port, proxyPort) => {
   const server = new WebpackDevServer(webpack(config), {
     quiet: false,
     proxy: {
-      "/api/": `http://localhost:${proxyPort}`
+      "/api/": `http://localhost:${proxyPort}`,
+      "/socket.io/": `http://localhost:${proxyPort}`
     },
     noInfo: false,
     stats: {
