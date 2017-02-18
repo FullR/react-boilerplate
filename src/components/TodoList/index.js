@@ -1,16 +1,13 @@
 import {React, Component} from "component";
-import {connect} from "react-redux";
+import connect from "connect";
 import style from "./style.css";
 import {tasks} from "store/actions";
 
-@connect(
-  ({tasks}) => ({tasks}),
-  (dispatch) => ({
-    onCreateTask: tasks.create.dispatcher(dispatch),
-    onRemoveTask: tasks.remove.dispatcher(dispatch),
-    onToggleTask: tasks.toggle.dispatcher(dispatch)
-  })
-)
+@connect("tasks", {
+  onCreateTask: tasks.create,
+  onRemoveTask: tasks.remove,
+  onToggleTask: tasks.toggle
+})
 export default class TodoList extends Component {
   state = {taskText: ""};
   handleTaskTextChange = (event) => this.setState({taskText: event.target.value});

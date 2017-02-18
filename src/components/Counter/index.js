@@ -1,15 +1,12 @@
 import {React, Component} from "component";
-import {connect} from "react-redux";
+import connect from "connect";
 import {count} from "store/actions";
 import style from "./style.css";
 
-@connect(
-  ({count}) => ({count}),
-  (dispatch) => ({
-    onIncrement: count.increment.dispatcher(dispatch),
-    onDecrement: count.decrement.dispatcher(dispatch)
-  })
-)
+@connect("count", {
+  onIncrement: count.increment,
+  onDecrement: count.decrement
+})
 export default class Counter extends Component {
   render() {
     const {count, onIncrement, onDecrement} = this.props;
