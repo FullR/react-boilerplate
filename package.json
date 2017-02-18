@@ -63,12 +63,16 @@
     "electron-prebuilt": "^1.4.13",
     "express": "^4.14.0",
     "hasher": "^1.2.0",
+    "lodash": "^4.17.4",
     "morgan": "^1.7.0",
     "normalize-css": "^2.3.1",
     "page": "^1.7.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-redux": "^5.0.2",
     "react-tap-event-plugin": "^2.0.1",
+    "rebass": "^0.3.4",
+    "redux": "^3.6.0",
     "roboto-fontface": "^0.6.0"
   }
 }
