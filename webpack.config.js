@@ -6,8 +6,6 @@ const {DefinePlugin, ProvidePlugin} = webpack;
 const local = (p) => path.join(__dirname, p);
 const truthy = (v) => !!v;
 
-console.log({ExtractTextPlugin, "ExtractTextPlugin.extract": typeof ExtractTextPlugin.extract})
-
 const PROD = config.get("production");
 const ifProd = (v, elseV=null) => PROD ? v : elseV;
 
