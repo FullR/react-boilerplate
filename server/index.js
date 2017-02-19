@@ -9,7 +9,6 @@ const PROD = process.env.NODE_ENV === "production";
 if(PROD) {
   apiServer(PORT);
 } else {
-  console.log({PORT, PROXY_PORT});
   apiServer(PROXY_PORT);
   devServer(PORT);
 }

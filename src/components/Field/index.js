@@ -4,10 +4,10 @@ import style from "./style.css";
 
 export default class Field extends Component {
   render() {
-    const {tags, query, className, children} = this.props;
+    const {tags, query, className, children, ...rest} = this.props;
 
     return (
-      <div {...this.props} className={classNames(className, style.root)}>
+      <div {...rest} className={classNames(className, style.root)}>
         {query && tags && !tags.includes(query) ? null : children}
       </div>
     );
