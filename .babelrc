@@ -1,4 +1,4 @@
 {
-  "presets": ["latest", "react"],
+  "presets": [["latest", { "modules": false }], "react"],
   "plugins": ["transform-decorators-legacy", "transform-object-rest-spread", "transform-class-properties"]
 }

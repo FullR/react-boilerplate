@@ -1,0 +1,5 @@
+{
+  "port": 8080,
+  "proxyPort": 8079,
+  "production": true
+}

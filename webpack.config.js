@@ -1,18 +1,33 @@
 const webpack = require("webpack");
 const path = require("path");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const config = require("./config");
 const {DefinePlugin, ProvidePlugin} = webpack;
 const local = (p) => path.join(__dirname, p);
 const truthy = (v) => !!v;
 
-const PROD = process.env.NODE_ENV === "production";
+console.log({ExtractTextPlugin, "ExtractTextPlugin.extract": typeof ExtractTextPlugin.extract})
+
+const PROD = config.get("production");
 const ifProd = (v, elseV=null) => PROD ? v : elseV;
+
+const extractTextLoaders = [
+  {
+    loader: "css-loader",
+    options: {
+      modules: true,
+      importLoaders: 1,
+      localIdentName: "[local]_[hash:base64:5]"
+    }
+  }
+];
 
 module.exports = {
   entry: "./src/app.js",
   resolve: {
-    root: [
-      path.resolve("./src")
+    modules: [
+      "src",
+      "node_modules"
     ]
   },
   output: {
@@ -20,34 +35,38 @@ module.exports = {
     filename: "bundle.js"
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: "babel"
+        use: [{loader: "babel-loader"}]
       },
       {
         // load css as modules but bundle them as a single file
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract("style", "css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]")
-      },
-      {
-        test: /\.json$/,
-        loader: "json"
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: extractTextLoaders
+        })
       },
       {
         // static assets are loaded as file
         test: /\.(html|eot|svg|ttf|woff|woff2)$/,
-        loader: "file?name=[name].[ext]"
+        use: [{
+          loader: "file-loader",
+          options: {
+            name: "[name].[ext]"
+          }
+        }]
       },
       {
         test: /\.(png|gif|jpeg|mp3|ogg)$/,
-        loader: "file"
+        use: [{loader: "file-loader"}]
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin("styles.css", {allChunks: true}),
+    new ExtractTextPlugin({filename: "styles.css", allChunks: true}),
     ifProd(new DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify("production")
@@ -59,5 +78,21 @@ module.exports = {
     new ProvidePlugin({
       log: PROD ? "util/log-production" : "util/log-development"
     })
-  ].filter(truthy)
+  ].filter(truthy),
+  devServer: {
+    quiet: false,
+    proxy: {
+      "/api/": `http://localhost:${config.get("proxyPort")}`
+    },
+    noInfo: false,
+    stats: {
+      assets: false,
+      colors: true,
+      version: false,
+      hash: false,
+      timings: false,
+      chunks: false,
+      chunkModules: false
+    }
+  }
 };
