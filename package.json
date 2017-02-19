@@ -73,6 +73,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "rebass": "^0.3.4",
     "redux": "^3.6.0",
-    "roboto-fontface": "^0.6.0"
+    "roboto-fontface": "^0.6.0",
+    "sillyname": "^0.1.0"
   }
 }

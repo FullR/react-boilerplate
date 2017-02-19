@@ -1,0 +1,10 @@
+
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.root :global(.Input),:global(.Select) {
+  flex: 1 1 auto;
+}
