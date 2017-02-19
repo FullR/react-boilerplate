@@ -13,7 +13,7 @@ const plugins = package.cordovaPlugins;
 const log = console.log.bind(console);
 const {appName, appId} = package;
 const dir = process.cwd();
-const cordovaDirName = "cordova";
+const cordovaDirName = "cordovaProject";
 const cordovaDir = path.join(dir, cordovaDirName);
 const configTemplatePath = path.join(dir, "cordova-config.xml");
 const configPath = path.join(cordovaDir, "config.xml");
@@ -25,7 +25,7 @@ const setupCordova = co.wrap(function* () {
 
   log("Creating cordova project");
   yield mkdirp(cordovaDir);
-  yield run(`cordova create cordova ${appId} "${appName}"`);
+  yield run(`cordova create ${cordovaDirName} ${appId} "${appName}"`);
 
   log("Setting up config.xml");
   const configTemplate = yield readFile(configTemplatePath, "utf8");
