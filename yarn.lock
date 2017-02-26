@@ -2350,6 +2350,10 @@ falafel@^1.0.1:
     isarray "0.0.1"
     object-keys "^1.0.6"
 
+fantasy-names:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/fantasy-names/-/fantasy-names-1.0.2.tgz#a366fac18d5aa4889f1623e02b0476c84f8c3cff"
+
 fastparse@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/fastparse/-/fastparse-1.1.1.tgz#d1e2643b38a94d7583b479060e6c4affc94071f8"

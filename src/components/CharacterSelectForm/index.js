@@ -24,8 +24,7 @@ export default class CharacterSelectForm extends Component {
         <Select
           label="Select Character"
           name="characterSelect"
-          placeholder="No characters"
-          value={characters.selected}
+          value={characters.selected || "No Characters"}
           onChange={this.handleChangeCharacter}
           options={characters.list.map(({fields, id}) => ({
             children: fields.name,

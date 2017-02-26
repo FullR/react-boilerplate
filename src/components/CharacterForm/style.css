@@ -7,6 +7,7 @@
 .bio {
   display: flex;
   flex-direction: row;
+  align-items: center;
 }
 
 .inputRow :global(.Input),
@@ -27,4 +28,8 @@
 }
 .abilityScore :global(.Input):first-child {
   flex: 3 1 auto;
+}
+
+.item :global(.Input) {
+  flex: 1 1 auto;
 }

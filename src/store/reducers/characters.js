@@ -1,30 +1,44 @@
 import {merge, set, uniqueId, random, sample} from "lodash";
 import replaceWhere from "util/replaceWhere";
-import sillyname from "sillyname";
+import randomName from "dnd/randomName";
+import randomBackstory from "dnd/randomBackstory";
 import races from "dnd/races";
+import alignments from "dnd/alignments";
+import genders from "dnd/genders";
 import rollStat from "dnd/rollStat";
 
 class Character {
-  constructor({
-    id = uniqueId("character-"),
-    fields = {
-      name: sillyname(),
-      age: random(15, 90),
-      level: 1,
-      race: sample(races),
-      hp: {current: 10, max: 10},
-      abilityScores: [
-        {name: "strength", value: rollStat()},
-        {name: "dexterity", value: rollStat()},
-        {name: "constitution", value: rollStat()},
-        {name: "intelligence", value: rollStat()},
-        {name: "wisdom", value: rollStat()},
-        {name: "charisma", value: rollStat()}
-      ]
+  constructor(options) {
+    if(!options) {
+      const race = sample(races);
+      const name = randomName(race);
+      const gender = sample(genders);
+      const backstory = randomBackstory(gender);
+      options = {
+        id: uniqueId(name),
+        fields: {
+          name,
+          race,
+          backstory,
+          gender,
+          age: random(15, 90),
+          alignment: sample(alignments),
+          level: 1,
+          hp: {current: 10, max: 10},
+          abilityScores: [
+            {name: "strength", value: rollStat()},
+            {name: "dexterity", value: rollStat()},
+            {name: "constitution", value: rollStat()},
+            {name: "intelligence", value: rollStat()},
+            {name: "wisdom", value: rollStat()},
+            {name: "charisma", value: rollStat()}
+          ],
+          items: []
+        },
+      };
     }
-  }={}) {
-    this.id = id;
-    this.fields = fields;
+
+    Object.assign(this, options);
   }
 
   updateField(field, value) {
@@ -33,6 +47,21 @@ class Character {
       fields: merge({}, {
         ...this.fields
       }, set({}, field, value))
+    });
+  }
+
+  createItem() {
+    const item = {id: uniqueId("item-"), name: "", weight: 0, description: ""};
+    return this.updateField("items", [...this.fields.items, item]);
+  }
+
+  removeItem(itemId) {
+    return new Character({
+      ...this,
+      fields: {
+        ...this.fields,
+        items: this.fields.items.filter((item) => item.id !== itemId)
+      }
     });
   }
 }
@@ -76,6 +105,41 @@ export default [{
         ...state,
         selected: state.selected === id ? null : state.selected,
         list: state.list.filter((character) => character.id !== id)
+      };
+    }
+  },
+
+  createItem: {
+    create(id) {
+      return {id};
+    },
+
+    reduce(state, {id}) {
+      return {
+        ...state,
+        list: replaceWhere(
+          state.list,
+          (character) => character.id === id,
+          (character) => character.createItem()
+        )
+      };
+    }
+  },
+
+  removeItem: {
+    create(id, itemId) {
+      return {id, itemId};
+    },
+
+    reduce(state, {id, itemId}) {
+      log({id, itemId})
+      return {
+        ...state,
+        list: replaceWhere(
+          state.list,
+          (character) => character.id === id,
+          (character) => character.removeItem(itemId)
+        )
       };
     }
   },
