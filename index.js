@@ -8,7 +8,7 @@ app.on("window-all-closed", () => app.quit());
 
 app.on("ready", () => {
   const mainWindow = new BrowserWindow({
-    title: appName || "",
+    title: appName || '',
     minWidth: width,
     minHeight: height,
     center: true

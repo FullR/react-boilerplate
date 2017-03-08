@@ -1,37 +1,37 @@
-import {React, Component} from "component";
-import {capitalize} from "lodash";
-import {Input, Select, Button, Label, Textarea} from "rebass";
-import connect from "connect";
-import {characters} from "store/actions";
-import Field from "components/Field";
-import races from "dnd/races";
-import alignments from "dnd/alignments";
-import genders from "dnd/genders";
-import getAbilityModifier from "dnd/getAbilityModifier";
-import style from "./style.css";
+import { React, Component } from 'component';
+import { capitalize } from 'lodash';
+import { Input, Select, Button, Label, Textarea } from 'rebass';
+import { compose } from 'ramda';
+import { connect } from 'react-redux';
+import Field from 'components/Field';
+import races from 'dnd/races';
+import alignments from 'dnd/alignments';
+import genders from 'dnd/genders';
+import getAbilityModifier from 'dnd/getAbilityModifier';
+import { removeCharacter, updateCharacterField, createItem, removeItem } from 'store/actions/characters';
+import style from './style.css';
 
 @connect(
-  ({characters}, {characterId}) => ({
-    character: characters.list.find((character) => character.id === characterId)
-  }), {
-    onUpdateField: characters.updateField,
-    onRemoveCharacter: characters.remove,
-    onCreateItem: characters.createItem,
-    onRemoveItem: characters.removeItem
-  }
+  ({characters}) => ({characters}),
+  (dispatch) => ({
+    onUpdateField: (id, key, value) => dispatch(updateCharacterField(id, key, value)),
+    onRemoveCharacter: (id) => dispatch(removeCharacter(id)),
+    onCreateItem: (id) => dispatch(createItem(id)),
+    onRemoveItem: (id, itemId) => dispatch(removeItem(id, itemId)),
+  })
 )
 export default class CharacterForm extends Component {
-  state = {fieldQuery: ""};
+  state = {fieldQuery: ''};
   handleChangeString = (field) => (event) => this.props.onUpdateField(this.props.character.id, field, event.target.value);
   handleChangeInt = (field) => (event) => this.props.onUpdateField(this.props.character.id, field, parseInt(event.target.value));
-  handleCreateItem = () => this.props.onCreateItem(this.props.characterId);
-  handleRemoveCharacter = () => this.props.onRemoveCharacter(this.props.characterId);
+  handleCreateItem = () => this.props.onCreateItem(this.props.character.id);
+  handleRemoveCharacter = () => this.props.onRemoveCharacter(this.props.character.id);
   handleChangeFieldQuery = (event) => this.setState({fieldQuery: event.target.value});
 
   render() {
-    const {characterId, character, onUpdateField, onCreateItem, onRemoveItem, onRemoveCharacter} = this.props;
-    const {fieldQuery} = this.state;
+    const {character, onUpdateField, onCreateItem, onRemoveItem, onRemoveCharacter} = this.props;
     const {name, age, race, level, abilityScores, hp, items, alignment, backstory, gender} = character.fields;
+    const {fieldQuery} = this.state;
 
     return (
       <div className={style.root}>
@@ -126,7 +126,7 @@ export default class CharacterForm extends Component {
                 <Input name={`item-${item.id}-name`} label="Name" type="text" value={name} onChange={this.handleChangeString(`items.${index}.name`)}/>
                 <Input name={`item-${item.id}-weight`} label="Weight" type="number" value={weight} onChange={this.handleChangeString(`items.${index}.weight`)}/>
                 <Input name={`item-${item.id}-description`} label="Description" type="text" value={description} onChange={this.handleChangeString(`items.${index}.description`)}/>
-                <Button onClick={onRemoveItem.bind(null, characterId, item.id)}>Remove</Button>
+                <Button onClick={onRemoveItem.bind(null, character.id, item.id)}>Remove</Button>
               </Field>
             </div>
           )

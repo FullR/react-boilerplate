@@ -1,6 +1,6 @@
-import {React, Component} from "component";
-import classNames from "classnames";
-import style from "./style.css";
+import { React, Component } from 'component';
+import classNames from 'classnames';
+import style from './style.css';
 
 export default class Field extends Component {
   render() {

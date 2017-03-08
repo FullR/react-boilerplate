@@ -1,4 +1,4 @@
-import eventToState from "util/eventToState";
+import eventToState from 'util/eventToState';
 
 export default function stateContainer(Component) {
   return class StateContainer extends Component {

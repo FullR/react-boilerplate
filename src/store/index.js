@@ -1,5 +1,9 @@
-import {createStore} from "redux";
-import {combineReducers} from "redux";
-import {reducers} from "./reducerParser";
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import promiseMiddleware from 'redux-promise';
+import createLogger from 'redux-logger';
+import reducers from './reducers';
 
-export default createStore(combineReducers(reducers));
+export default createStore(combineReducers(reducers), applyMiddleware(
+  promiseMiddleware,
+  createLogger({collapsed: true}),
+));

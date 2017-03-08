@@ -1,37 +1,33 @@
-import {React, Component} from "component";
-import connect from "connect";
-import {Select, Button} from "rebass";
-import {selectedCharacterId, characters} from "store/actions";
-import style from "./style.css";
+import { React, Component } from 'component';
+import { Select, Button } from 'rebass';
+import style from './style.css';
 
-@connect("characters", {
-  onSelectCharacter: characters.select,
-  onCreateCharacter: characters.create
-})
 export default class CharacterSelectForm extends Component {
   handleChangeCharacter = (event) => {
-      this.props.onSelectCharacter(event.target.value);
+      this.props.onChange(event.target.value);
   };
+
   handleCreateCharacter = () => {
     this.setState({dropdownOpen: false});
-    this.props.onCreateCharacter();
+    this.props.onCreate();
   };
+
   render() {
-    const {characters, onCreateCharacter} = this.props;
+    const {value, characters, onCreate} = this.props;
 
     return (
       <div className={style.root}>
         <Select
           label="Select Character"
           name="characterSelect"
-          value={characters.selected || "No Characters"}
+          value={value || "No Characters"}
           onChange={this.handleChangeCharacter}
-          options={characters.list.map(({fields, id}) => ({
+          options={characters.map(({fields, id}) => ({
             children: fields.name,
             value: id
           }))}
         />
-        <Button onClick={onCreateCharacter}>Create</Button>
+        <Button onClick={onCreate}>Create</Button>
       </div>
     );
   }

@@ -1,5 +1,5 @@
 function getEventValue(event) {
-  return event.target.value || "";
+  return event.target.value || '';
 }
 
 export default function eventToState(component, stateKey, parsers) {

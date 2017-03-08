@@ -1,5 +1,5 @@
-import {connect} from "react-redux";
-import {transform} from "lodash";
+import { connect } from 'react-redux';
+import { transform } from 'lodash';
 
 export default function wrappedConnect(mapStateToProps, mapPropsToDispatch, ...rest) {
   if(typeof mapStateToProps === "string") mapStateToProps = [mapStateToProps];
